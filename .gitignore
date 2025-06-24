@@ -2,3 +2,5 @@
 __pycache__/
 venv/
 .env/
+chromedriver-win64/
+.DS_Store

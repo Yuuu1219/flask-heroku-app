@@ -328,6 +328,131 @@ body::before {
     opacity: 0.5;
 }
 
+/* 新增样式 */
+.result-content .content-box {
+    background: rgba(30, 35, 48, 0.7);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    line-height: 1.7;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.translation {
+    color: #a3daff;
+    border-left: 3px solid var(--primary);
+    padding-left: 15px !important;
+}
+
+.attractive-list li {
+    margin-bottom: 12px;
+    padding-left: 5px;
+    border-left: 2px solid var(--accent);
+}
+
+.error .result-header {
+    color: var(--error);
+}
+
+.retry-section {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#retry-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+#retry-btn:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+}
+
+.share-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+#new-analysis {
+    background: linear-gradient(to right, var(--secondary), var(--primary));
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+#new-analysis:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(128, 90, 213, 0.4);
+}
+
+/* 加载动画 */
+.spinner {
+    margin: 20px auto;
+    width: 70px;
+    text-align: center;
+}
+
+.spinner > div {
+    width: 18px;
+    height: 18px;
+    background-color: var(--accent);
+    border-radius: 100%;
+    display: inline-block;
+    animation: bounce 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+    animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+    animation-delay: -0.16s;
+}
+
+@keyframes bounce {
+    0%, 80%, 100% { transform: scale(0); }
+    40% { transform: scale(1.0); }
+}
+
+.loading-tip {
+    color: var(--text-light);
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .control-panel, .results-container {
+        width: 100%;
+    }
+    
+    .control-panel {
+        border-right: none;
+        border-bottom: 1px solid rgba(74, 85, 104, 0.5);
+    }
+}
+
 /* 动画 */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(20px); }

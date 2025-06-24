@@ -1,0 +1,10 @@
+venv/
+.env/
+__pycache__/
+*.pyc
+*.log
+*.tmp
+.DS_Store
+.git/
+.gitignore
+chromedriver-win64/

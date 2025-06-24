@@ -1,6 +1,7 @@
-spacy
-selenium
+spacy==3.7.4
+selenium==4.21.0
 Flask==2.1.1
 werkzeug==2.2.3
 gunicorn==20.1.0
-deep-translator
+deep-translator==1.11.4
+python-dotenv==1.0.1

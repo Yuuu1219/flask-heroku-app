@@ -11,9 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // 验证URL格式
+        // 增强URL验证
         if (!isValidTwitterUrl(tweetUrl)) {
-            showError('请输入有效的Twitter/X链接 (https://twitter.com/... 或 https://x.com/...)');
+            showError('请输入有效的Twitter/X链接 (如: https://twitter.com/... 或 https://x.com/...)');
             return;
         }
         
@@ -44,12 +44,24 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // 添加键盘支持
+    tweetUrlInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            analyzeBtn.click();
+        }
+    });
+    
     function showLoading() {
         resultsContent.innerHTML = `
             <div class="result-section">
                 <div class="result-placeholder">
-                    <i class="fas fa-spinner fa-spin"></i>
+                    <div class="spinner">
+                        <div class="bounce1"></div>
+                        <div class="bounce2"></div>
+                        <div class="bounce3"></div>
+                    </div>
                     <p>正在分析中，请稍候...</p>
+                    <p class="loading-tip">这可能需要10-20秒，请耐心等待</p>
                 </div>
             </div>
         `;
@@ -58,15 +70,23 @@ document.addEventListener('DOMContentLoaded', function() {
     function showError(message) {
         resultsContent.innerHTML = `
             <div class="result-section">
-                <div class="result-header">
+                <div class="result-header error">
                     <i class="fas fa-exclamation-triangle"></i>
                     <h3>错误</h3>
                 </div>
                 <div class="result-content">
                     ${message}
                 </div>
+                <div class="retry-section">
+                    <button id="retry-btn">重试</button>
+                </div>
             </div>
         `;
+        
+        // 添加重试按钮事件
+        document.getElementById('retry-btn').addEventListener('click', function() {
+            tweetUrlInput.focus();
+        });
     }
     
     function displayResults(data) {
@@ -81,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3>推文原文</h3>
                 </div>
                 <div class="result-content">
-                    ${data.tweet_content || '无内容'}
+                    <div class="content-box">${data.tweet_content || '无内容'}</div>
                 </div>
             </div>
         `;
@@ -94,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <h3>中文翻译</h3>
                 </div>
                 <div class="result-content">
-                    ${data.translation || '无翻译结果'}
+                    <div class="content-box translation">${data.translation || '无翻译结果'}</div>
                 </div>
             </div>
         `;
@@ -123,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // 吸引点内容
         if (data.attractive_content && data.attractive_content.length > 0) {
             const attractiveHTML = data.attractive_content.map(item => 
-                `<li>${item}</li>`
+                `<li><i class="fas fa-star"></i> ${item}</li>`
             ).join('');
             
             resultsHTML += `
@@ -133,16 +153,39 @@ document.addEventListener('DOMContentLoaded', function() {
                         <h3>吸引点分析</h3>
                     </div>
                     <div class="result-content">
-                        <ul>${attractiveHTML}</ul>
+                        <ul class="attractive-list">${attractiveHTML}</ul>
                     </div>
                 </div>
             `;
         }
         
+        // 添加分享按钮
+        resultsHTML += `
+            <div class="share-section">
+                <button id="new-analysis">
+                    <i class="fas fa-plus"></i> 新的分析
+                </button>
+            </div>
+        `;
+        
         resultsContent.innerHTML = resultsHTML;
+        
+        // 添加新分析按钮事件
+        document.getElementById('new-analysis').addEventListener('click', function() {
+            tweetUrlInput.value = '';
+            tweetUrlInput.focus();
+            resultsContent.innerHTML = `
+                <div class="result-section">
+                    <div class="result-placeholder">
+                        <i class="fas fa-file-alt"></i>
+                        <p>分析结果将显示在这里</p>
+                    </div>
+                </div>
+            `;
+        });
     }
     
     function isValidTwitterUrl(url) {
-        return /https?:\/\/(x\.com|twitter\.com)\/\S+/i.test(url);
+        return /https?:\/\/(x\.com|twitter\.com|www\.x\.com|www\.twitter\.com)\/\S+/i.test(url);
     }
 });
