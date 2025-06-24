@@ -1,10 +1,19 @@
-venv/
-.env/
-__pycache__/
+# 忽略不需要的文件
+Dockerfile
+.dockerignore
+.git
+.gitignore
+.venv
+venv
+env
+__pycache__
 *.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.coverage
 *.log
 *.tmp
+*.bak
 .DS_Store
-.git/
-.gitignore
-chromedriver-win64/
+.env

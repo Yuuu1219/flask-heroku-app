@@ -1,6 +1,29 @@
-*.pyc
+# Python
 __pycache__/
+*.pyc
+*.pyo
+*.pyd
+.python-version
+
+# Environments
+.env
+.venv
+env/
 venv/
-.env/
-chromedriver-win64/
+ENV/
+
+# Docker
+Dockerfile
+.dockerignore
+
+# OS
 .DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
