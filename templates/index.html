@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推文内容分析器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <!-- 左侧控制面板 -->
+        <div class="control-panel">
+            <div class="panel-header">
+                <div class="logo">
+                    <i class="fas fa-brain"></i>
+                    <h1>推文内容分析器</h1>
+                </div>
+                <p class="subtitle">输入推文链接，获取内容分析结果</p>
+            </div>
+            
+            <div class="input-group">
+                <label for="tweet_url"><i class="fas fa-link"></i> 推文链接</label>
+                <div class="input-wrapper">
+                    <input type="text" id="tweet_url" placeholder="https://twitter.com/... 或 https://x.com/..." autocomplete="off">
+                    <button id="analyze-btn">
+                        <i class="fas fa-search"></i> 开始分析
+                    </button>
+                </div>
+            </div>
+            
+            <div class="tips">
+                <h3><i class="fas fa-lightbulb"></i> 分析原理</h3>
+                <ul>
+                    <li>使用NLP技术提取关键词和主题</li>
+                    <li>识别情感强烈和吸引注意力的内容</li>
+                    <li>自动翻译非中文内容</li>
+                </ul>
+            </div>
+            
+            <div class="model-status">
+                <div class="status-indicator active"></div>
+                <span>服务在线</span>
+            </div>
+        </div>
+        
+        <!-- 右侧结果窗口 -->
+        <div class="results-container">
+            <div class="results-header">
+                <div class="results-info">
+                    <div class="results-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div>
+                        <h3>分析结果</h3>
+                        <p>推文内容解析</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results-content" id="results-content">
+                <!-- 结果将在这里显示 -->
+                <div class="result-section">
+                    <div class="result-placeholder">
+                        <i class="fas fa-file-alt"></i>
+                        <p>分析结果将显示在这里</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
